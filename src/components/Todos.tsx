@@ -1,7 +1,8 @@
 import { ReactNode } from "react"
-
+import Todo from "../models/todo";
+import TodoItem from "./TodoItem";
 type AppProps = {
-    todos: string[];
+    todos: Todo[];
     children?: ReactNode;
 }
 
@@ -9,7 +10,7 @@ const Todos = ( {todos}: AppProps) => {
   return (
     <ul>
         {todos.map((item) => {
-            return <li key={item}>{item}</li>
+            return <TodoItem key={item.id} {...item}/>
         }) }
     </ul>
   )
