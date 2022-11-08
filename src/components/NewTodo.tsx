@@ -1,6 +1,11 @@
 import React, { useRef } from 'react';
+import './NewTodo.css';
 
-const NewTodo = () => {
+type FCProps = {
+  addTodo: Function;
+}
+
+const NewTodo = ({addTodo} : FCProps) => {
   const todoInput = useRef<HTMLInputElement>(null);
 
   const submitHandler = (e: React.FormEvent) => {
@@ -11,10 +16,12 @@ const NewTodo = () => {
       //throw error
       return;
     }
+
+    addTodo(text);
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} className="form">
       <label htmlFor='text'>Todo text</label>
       <input type='text' id='text' ref={todoInput} />
       <button>Add Todo</button>
