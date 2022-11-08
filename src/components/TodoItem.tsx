@@ -1,25 +1,17 @@
-import React from 'react'
-import Todo from '../models/todo';
-import './TodoItem.css'
-
-
+import './TodoItem.css';
+import { useContext } from 'react';
+import { TodosContext } from '../store/todo-context';
 type TodoItemProps = {
-    text: string;
-    id: string;
-    todos: Todo[];
-    setTodos : React.Dispatch<React.SetStateAction<Todo[]>>;
-}
-
-const TodoItem = ({text, id, todos, setTodos}: TodoItemProps) => {
-
-  const removeTodo = () => {
-    const newArray = todos.filter(todo => todo.id !== id)  
-    setTodos(newArray);
-  }
-  
+  text: string;
+  id: string;
+};
+const TodoItem = ({ text, id }: TodoItemProps) => {
+  const todosCtx = useContext(TodosContext);
   return (
-    <li className='item' onClick={removeTodo}>{text}</li>
-  )
-}
+    <li className='item' onClick={() => {todosCtx.removeTodo(id)}}>
+      {text}
+    </li>
+  );
+};
 
-export default TodoItem
+export default TodoItem;
